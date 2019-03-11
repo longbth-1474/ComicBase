@@ -1,0 +1,47 @@
+package longhoang.com.comicbase;
+
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.interceptors.HttpLoggingInterceptor;
+
+import javax.inject.Inject;
+
+import androidx.multidex.MultiDex;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasActivityInjector;
+import longhoang.com.comicbase.data.network.TokenInterceptor;
+import longhoang.com.comicbase.di.BAnkAppInjector;
+import okhttp3.OkHttpClient;
+
+public class BAnkApp extends Application implements HasActivityInjector {
+    @Inject
+    DispatchingAndroidInjector<Activity> dispatchingAndroidInjector;
+
+    @Override
+    public AndroidInjector<Activity> activityInjector() {
+        return dispatchingAndroidInjector;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        BAnkAppInjector.init(this);
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
+            .addInterceptor(new TokenInterceptor())
+            .build();
+        AndroidNetworking.initialize(getApplicationContext(), okHttpClient);
+        if (BuildConfig.DEBUG) {
+            AndroidNetworking.enableLogging(HttpLoggingInterceptor.Level.BODY);
+        }
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
+}
