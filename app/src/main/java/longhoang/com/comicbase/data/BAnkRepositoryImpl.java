@@ -15,6 +15,8 @@ import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
 import longhoang.com.comicbase.data.model.api.comic.ComicBody;
 import longhoang.com.comicbase.data.model.api.comic.ComicResponse;
+import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryBody;
+import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryResponse;
 import longhoang.com.comicbase.data.model.api.home.HomeResponse;
 import longhoang.com.comicbase.data.remote.BAnkApiHelper;
 import longhoang.com.comicbase.utils.ConfigManager;
@@ -60,5 +62,11 @@ public class BAnkRepositoryImpl implements BAnkRepository {
     @Override
     public Single<CategoryResponse> getCategoriesApiCall() {
         return mApiHelper.getCategoriesApiCall();
+    }
+
+    @Override
+    public Single<DetailCategoryResponse> getDetailCategoriesApiCall(
+        DetailCategoryBody detailCategoryBody) {
+        return mApiHelper.getDetailCategoriesApiCall(detailCategoryBody);
     }
 }

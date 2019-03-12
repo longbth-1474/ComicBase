@@ -12,6 +12,8 @@ import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
 import longhoang.com.comicbase.data.model.api.comic.ComicBody;
 import longhoang.com.comicbase.data.model.api.comic.ComicResponse;
+import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryBody;
+import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryResponse;
 import longhoang.com.comicbase.data.model.api.home.HomeResponse;
 
 /**
@@ -53,5 +55,13 @@ public class BAnkApiHelperImpl implements BAnkApiHelper {
     public Single<CategoryResponse> getCategoriesApiCall() {
         return Rx2AndroidNetworking.get(BAnkApiEndPoint.ENDPOINT_CATEGORY).build()
             .getObjectSingle(CategoryResponse.class);
+    }
+
+    @Override
+    public Single<DetailCategoryResponse> getDetailCategoriesApiCall(
+        DetailCategoryBody detailCategoryBody) {
+        return Rx2AndroidNetworking.post(BAnkApiEndPoint.ENDPOINT_CATEGORY_CONTENT)
+            .addBodyParameter(detailCategoryBody).build()
+            .getObjectSingle(DetailCategoryResponse.class);
     }
 }

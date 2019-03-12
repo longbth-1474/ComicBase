@@ -106,4 +106,5 @@
     <dimen name="dp_85">85dp</dimen>
 	<dimen name="dp_250">250dp</dimen>
 	<dimen name="dp_44">44dp</dimen>
+    <dimen name="sp_18">18sp</dimen>
 </resources>
