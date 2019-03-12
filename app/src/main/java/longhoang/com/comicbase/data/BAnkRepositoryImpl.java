@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 import io.reactivex.Single;
 import longhoang.com.comicbase.data.local.db.BAnkDBHelper;
 import longhoang.com.comicbase.data.model.api.BlogResponse;
+import longhoang.com.comicbase.data.model.api.category.CategoryResponse;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
 import longhoang.com.comicbase.data.model.api.comic.ComicBody;
@@ -54,5 +55,10 @@ public class BAnkRepositoryImpl implements BAnkRepository {
     @Override
     public Single<ChapterResponse> getChapterApiCall(ChapterBody chapterBody) {
         return mApiHelper.getChapterApiCall(chapterBody);
+    }
+
+    @Override
+    public Single<CategoryResponse> getCategoriesApiCall() {
+        return mApiHelper.getCategoriesApiCall();
     }
 }
