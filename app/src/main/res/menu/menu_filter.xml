@@ -1,0 +1,50 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.myapplication.MainActivity">
+    <item
+        android:id="@+id/action_date_update"
+        android:orderInCategory="100"
+        android:title="Ngày cập nhật"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_new_comic"
+        android:orderInCategory="100"
+        android:title="Truyện mới"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_all"
+        android:orderInCategory="100"
+        android:title="Top all"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_month"
+        android:orderInCategory="100"
+        android:title="Top tháng"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_week"
+        android:orderInCategory="100"
+        android:title="Top tuần"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_top_day"
+        android:orderInCategory="100"
+        android:title="Top ngày"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_follows"
+        android:orderInCategory="100"
+        android:title="Theo dõi"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_comment"
+        android:orderInCategory="100"
+        android:title="Bình luận"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_name_comic"
+        android:orderInCategory="100"
+        android:title="Tên truyện"
+        app:showAsAction="never" />
+</menu>
