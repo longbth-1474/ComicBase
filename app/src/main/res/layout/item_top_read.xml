@@ -1,16 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <variable
+            name="listener"
+            type="longhoang.com.comicbase.ui.home.HomeListener"/>
+
         <variable
             name="viewModel"
             type="longhoang.com.comicbase.data.model.api.home.Proposal"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/constraint_layout"
         android:layout_width="@dimen/dp_250"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{()->listener.onClickTopReadListener(viewModel)}">
 
         <View
             android:id="@+id/top_line"
@@ -19,44 +27,44 @@
             android:background="@color/color_underline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatImageView
-            app:imageUrl="@{viewModel.urlImage}"
             android:id="@+id/image_top_read"
             android:layout_width="@dimen/dp_44"
             android:layout_height="@dimen/dp_44"
             android:layout_margin="@dimen/dp_5"
+            app:imageUrl="@{viewModel.urlImage}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/top_line" />
+            app:layout_constraintTop_toBottomOf="@+id/top_line"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="@{viewModel.title}"
             android:id="@+id/text_title_top_read"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp_5"
             android:ellipsize="end"
             android:maxLines="1"
+            android:text="@{viewModel.title}"
             android:textColor="@android:color/black"
             app:layout_constraintStart_toEndOf="@+id/image_top_read"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:text="@{viewModel.chapter}"
             android:id="@+id/text_recent_chapter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@{viewModel.chapter}"
             app:layout_constraintStart_toStartOf="@+id/text_title_top_read"
-            app:layout_constraintTop_toBottomOf="@+id/text_title_top_read" />
+            app:layout_constraintTop_toBottomOf="@+id/text_title_top_read"/>
 
         <View
             android:id="@+id/bottom_line"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_0_5"
             android:background="@color/color_underline"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

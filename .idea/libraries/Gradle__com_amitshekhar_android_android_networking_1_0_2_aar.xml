@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="Gradle: com.amitshekhar.android:android-networking:1.0.2@aar">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-android-networking-1.0.2.aar/d9eefc3b6f49082e8ace2d1ce1505e18/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-android-networking-1.0.2.aar/d9eefc3b6f49082e8ace2d1ce1505e18/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-android-networking-1.0.2.aar/e616c7a44efea28e0231b08606e2cf2b/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jetified-android-networking-1.0.2.aar/e616c7a44efea28e0231b08606e2cf2b/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

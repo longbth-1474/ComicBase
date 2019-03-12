@@ -10,14 +10,14 @@ import javax.inject.Singleton;
 import io.reactivex.Single;
 import longhoang.com.comicbase.data.local.db.BAnkDBHelper;
 import longhoang.com.comicbase.data.model.api.BlogResponse;
+import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
+import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
+import longhoang.com.comicbase.data.model.api.comic.ComicBody;
+import longhoang.com.comicbase.data.model.api.comic.ComicResponse;
 import longhoang.com.comicbase.data.model.api.home.HomeResponse;
 import longhoang.com.comicbase.data.remote.BAnkApiHelper;
 import longhoang.com.comicbase.utils.ConfigManager;
 
-
-/**
- * Created by Cong Nguyen on 2/18/19.
- */
 @Singleton
 public class BAnkRepositoryImpl implements BAnkRepository {
     private final Gson mGson;
@@ -44,5 +44,15 @@ public class BAnkRepositoryImpl implements BAnkRepository {
     @Override
     public Single<HomeResponse> getHomeApiCall() {
         return mApiHelper.getHomeApiCall();
+    }
+
+    @Override
+    public Single<ComicResponse> getComicApiCall(ComicBody comicBody) {
+        return mApiHelper.getComicApiCall(comicBody);
+    }
+
+    @Override
+    public Single<ChapterResponse> getChapterApiCall(ChapterBody chapterBody) {
+        return mApiHelper.getChapterApiCall(chapterBody);
     }
 }

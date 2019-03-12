@@ -15,15 +15,16 @@
  */
 package longhoang.com.comicbase.data.remote;
 
-
 import longhoang.com.comicbase.BuildConfig;
 
-/**
- * Created by Cong Nguyen on 2/18/19.
- */
 public final class BAnkApiEndPoint {
     public static final String ENDPOINT_BLOG = BuildConfig.BASE_URL + "/5926ce9d11000096006ccb30";
     public static final String ENDPOINT_HOME = BuildConfig.BASE_URL + "/home";
+    public static final String ENDPOINT_DETAIL_COMIC = BuildConfig.BASE_URL + "/detailComic";
+    public static final String ENDPOINT_CHAPTER = BuildConfig.BASE_URL + "/chapter";
+    public static final String ENDPOINT_CATEGORY = BuildConfig.BASE_URL + "/categoryComic";
+    public static final String ENDPOINT_CATEGORY_CONTENT = BuildConfig.BASE_URL +
+        "/contentCategory";
 
     private BAnkApiEndPoint() {
         // This class is not publicly instantiable
