@@ -7,6 +7,7 @@ import javax.inject.Singleton;
 
 import io.reactivex.Single;
 import longhoang.com.comicbase.data.model.api.BlogResponse;
+import longhoang.com.comicbase.data.model.api.category.CategoryResponse;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
 import longhoang.com.comicbase.data.model.api.comic.ComicBody;
@@ -46,5 +47,11 @@ public class BAnkApiHelperImpl implements BAnkApiHelper {
     public Single<ChapterResponse> getChapterApiCall(ChapterBody chapterBody) {
         return Rx2AndroidNetworking.post(BAnkApiEndPoint.ENDPOINT_CHAPTER)
             .addBodyParameter(chapterBody).build().getObjectSingle(ChapterResponse.class);
+    }
+
+    @Override
+    public Single<CategoryResponse> getCategoriesApiCall() {
+        return Rx2AndroidNetworking.get(BAnkApiEndPoint.ENDPOINT_CATEGORY).build()
+            .getObjectSingle(CategoryResponse.class);
     }
 }

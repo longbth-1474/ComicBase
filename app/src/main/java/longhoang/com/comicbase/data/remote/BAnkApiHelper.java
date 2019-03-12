@@ -3,6 +3,7 @@ package longhoang.com.comicbase.data.remote;
 
 import io.reactivex.Single;
 import longhoang.com.comicbase.data.model.api.BlogResponse;
+import longhoang.com.comicbase.data.model.api.category.CategoryResponse;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterBody;
 import longhoang.com.comicbase.data.model.api.chapter.ChapterResponse;
 import longhoang.com.comicbase.data.model.api.comic.ComicBody;
@@ -17,4 +18,5 @@ public interface BAnkApiHelper {
     Single<HomeResponse> getHomeApiCall();
     Single<ComicResponse> getComicApiCall(ComicBody comicBody);
     Single<ChapterResponse> getChapterApiCall(ChapterBody chapterBody);
+    Single<CategoryResponse> getCategoriesApiCall();
 }
