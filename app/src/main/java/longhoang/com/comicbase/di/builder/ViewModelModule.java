@@ -13,6 +13,7 @@ import longhoang.com.comicbase.ui.chapter.ChapterViewModel;
 import longhoang.com.comicbase.ui.comic.ComicViewModel;
 import longhoang.com.comicbase.ui.detail.category.DetailCategoriesViewModel;
 import longhoang.com.comicbase.ui.home.HomeViewModel;
+import longhoang.com.comicbase.ui.search.SearchViewModel;
 import longhoang.com.comicbase.ui.user.UserViewModel;
 
 @Module
@@ -47,4 +48,8 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DetailCategoriesViewModel.class)
     abstract ViewModel bindDetailCategoriesViewModel(DetailCategoriesViewModel viewModel);
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchViewModel.class)
+    abstract ViewModel bindSearchViewModel(SearchViewModel viewModel);
 }

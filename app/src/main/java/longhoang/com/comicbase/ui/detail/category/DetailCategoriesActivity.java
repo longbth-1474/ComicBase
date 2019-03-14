@@ -19,11 +19,27 @@ import longhoang.com.comicbase.data.model.api.detail.category.ComicItem;
 import longhoang.com.comicbase.databinding.ActivityDetailCategoriesBinding;
 import longhoang.com.comicbase.ui.comic.ComicFragment;
 
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.ALL;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.CATEGORY;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.COMMENT;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.COMPLETE;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.DATE_UPDATE;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.FOLLOW;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.NAME_COMIC;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.NEW_COMIC;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.TOP_ALL;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.TOP_DAY;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.TOP_MONTH;
+import static longhoang.com.comicbase.ui.detail.category.CategoriesMode.TOP_WEEK;
+
 public class DetailCategoriesActivity
     extends BaseFragmentActivity<ActivityDetailCategoriesBinding, DetailCategoriesViewModel>
     implements DetailCategoriesListener {
     public static final String BUNDLE_CATEGORY = "BUNDLE_CATEGORY";
     private Category mCategory;
+    private int mStatus;
+    private int mSort;
+    private int mPage = 1;
 
     @Override
     public int getLayoutId() {
@@ -39,15 +55,24 @@ public class DetailCategoriesActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setSupportActionBar(getViewDataBinding().toolbar);
-        Drawable drawable =
-            ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_filter);
-        getViewDataBinding().toolbar.setOverflowIcon(drawable);
+        setUpToolbar();
         mCategory = getIntent().getParcelableExtra(BUNDLE_CATEGORY);
         if (mCategory == null) return;
         getViewDataBinding().textTitle.setText(mCategory.getTitle());
         initRecyclerDetailCategory();
         initTablayout();
+        initListener();
+    }
+
+    private void initListener() {
+        getViewDataBinding().icBack.setOnClickListener(v -> onBackPressed());
+    }
+
+    private void setUpToolbar() {
+        setSupportActionBar(getViewDataBinding().toolbar);
+        Drawable drawable =
+            ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_filter);
+        getViewDataBinding().toolbar.setOverflowIcon(drawable);
     }
 
     private void initTablayout() {
@@ -55,6 +80,18 @@ public class DetailCategoriesActivity
             new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
+                    switch (tab.getPosition()) {
+                        case 0:
+                            mStatus = ALL;
+                            break;
+                        case 1:
+                            mStatus = CATEGORY;
+                            break;
+                        case 2:
+                            mStatus = COMPLETE;
+                            break;
+                    }
+                    getViewModel().fetchDetailCategories(createURL(), mPage);
                 }
 
                 @Override
@@ -77,44 +114,50 @@ public class DetailCategoriesActivity
         adapter.setPresenter(this);
         getViewModel().mComicItemLiveData.observe(this, comicItems
             -> adapter.set(getViewModel().mComicItemLiveData.getValue()));
-        getViewModel().fetchDetailCategories(mCategory.getUrl(), 1);
+        getViewModel().fetchDetailCategories(mCategory.getUrl(), mPage);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        String urlComic = null;
+        String urlComic;
         switch (id) {
             case R.id.action_date_update:
-                urlComic = mCategory.getUrl();
+                mSort = DATE_UPDATE;
                 break;
             case R.id.action_new_comic:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=15";
+                mSort = NEW_COMIC;
                 break;
             case R.id.action_top_all:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=10";
+                mSort = TOP_ALL;
                 break;
             case R.id.action_top_month:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=11";
+                mSort = TOP_MONTH;
                 break;
             case R.id.action_top_week:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=12";
+                mSort = TOP_WEEK;
                 break;
             case R.id.action_top_day:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=13";
+                mSort = TOP_DAY;
                 break;
             case R.id.action_follows:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=20";
+                mSort = FOLLOW;
                 break;
             case R.id.action_comment:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=25";
+                mSort = COMMENT;
                 break;
             case R.id.action_name_comic:
-                urlComic = mCategory.getUrl() + "?status=-1&sort=5";
+                mSort = NAME_COMIC;
                 break;
         }
-        getViewModel().fetchDetailCategories(urlComic, 1);
+        urlComic = createURL();
+        getViewModel().fetchDetailCategories(urlComic, mPage);
         return super.onOptionsItemSelected(item);
+    }
+
+    private String createURL() {
+        return mCategory.getUrl() + getString(R.string.query_status) + mStatus +
+            getString(R.string.query_sort) + mSort;
     }
 
     @Override

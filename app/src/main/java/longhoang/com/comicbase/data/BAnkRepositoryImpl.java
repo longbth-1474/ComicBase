@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -18,9 +20,12 @@ import longhoang.com.comicbase.data.model.api.comic.ComicResponse;
 import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryBody;
 import longhoang.com.comicbase.data.model.api.detail.category.DetailCategoryResponse;
 import longhoang.com.comicbase.data.model.api.home.HomeResponse;
+import longhoang.com.comicbase.data.model.api.search.SearchBody;
+import longhoang.com.comicbase.data.model.api.search.SearchResponse;
+import longhoang.com.comicbase.data.model.db.HistorySearch;
 import longhoang.com.comicbase.data.remote.BAnkApiHelper;
 import longhoang.com.comicbase.utils.ConfigManager;
-
+import io.reactivex.Observable;
 @Singleton
 public class BAnkRepositoryImpl implements BAnkRepository {
     private final Gson mGson;
@@ -68,5 +73,25 @@ public class BAnkRepositoryImpl implements BAnkRepository {
     public Single<DetailCategoryResponse> getDetailCategoriesApiCall(
         DetailCategoryBody detailCategoryBody) {
         return mApiHelper.getDetailCategoriesApiCall(detailCategoryBody);
+    }
+
+    @Override
+    public Single<SearchResponse> getSearchApiCall(SearchBody searchBody) {
+        return mApiHelper.getSearchApiCall(searchBody);
+    }
+
+    @Override
+    public Observable<Boolean> clearAllHistorySearch() {
+        return mDbHelper.clearAllHistorySearch();
+    }
+
+    @Override
+    public Observable<List<HistorySearch>> getAllHistorySearch() {
+        return mDbHelper.getAllHistorySearch();
+    }
+
+    @Override
+    public Observable<Boolean> insertHistorySearch(HistorySearch historySearch) {
+        return mDbHelper.insertHistorySearch(historySearch);
     }
 }

@@ -1,6 +1,5 @@
 package longhoang.com.comicbase.data.local.db.dao;
 
-
 import java.util.List;
 
 import androidx.room.Dao;
@@ -10,9 +9,6 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import longhoang.com.comicbase.data.model.db.User;
 
-/**
- * Created by Cong Nguyen on 2/19/19.
- */
 @Dao
 public interface UserDao {
     @Delete
@@ -28,4 +24,3 @@ public interface UserDao {
     @Query("SELECT * FROM users WHERE id IN (:userIds)")
     List<User> loadAllByIds(List<Integer> userIds);
 }
-

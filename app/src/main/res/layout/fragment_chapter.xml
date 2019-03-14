@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/dp_10"
-                android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
+                android:src="@drawable/ic_keyboard_arrow_left_black"/>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/text_title_chapter"
@@ -55,7 +55,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/relative_top"/>
 
-        <WebView
+        <com.github.ksoichiro.android.observablescrollview.ObservableWebView
             android:id="@+id/webView_comic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
             android:id="@+id/linear_comment"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
+            android:background="@android:color/black"
             android:clickable="true"
             android:focusable="true"
             android:orientation="vertical"
@@ -82,28 +82,19 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp_30"
+                    android:layout_height="@dimen/dp_25"
                     android:layout_marginBottom="@dimen/dp_5"
                     android:layout_marginEnd="@dimen/dp_10"
                     android:layout_marginStart="@dimen/dp_10"
                     android:layout_marginTop="@dimen/dp_10"
                     android:layout_toStartOf="@+id/ic_send"
-                    android:background="@drawable/custom_search">
-
-                    <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/ic_comment"
-                        android:layout_width="@dimen/dp_16"
-                        android:layout_height="@dimen/dp_16"
-                        android:layout_centerVertical="true"
-                        android:layout_marginStart="@dimen/dp_10"
-                        android:src="@drawable/ic_comment"/>
+                    android:background="@drawable/custom_comment">
 
                     <androidx.appcompat.widget.AppCompatEditText
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="@dimen/dp_10"
                         android:layout_marginStart="@dimen/dp_10"
-                        android:layout_toEndOf="@+id/ic_comment"
                         android:background="@android:color/transparent"
                         android:hint="@string/hint_feeling_comic"
                         android:textSize="@dimen/sp_12"/>
@@ -112,8 +103,8 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ic_send"
-                    android:layout_width="@dimen/dp_24"
-                    android:layout_height="@dimen/dp_24"
+                    android:layout_width="@dimen/dp_20"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="@dimen/dp_10"
@@ -127,12 +118,14 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/previous_chap"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:src="@drawable/ic_keyboard_arrow_left_black_24dp"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:textColor="@color/color_white"
+                    android:textAllCaps="false"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -141,24 +134,24 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/next_chap"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:src="@drawable/ic_keyboard_arrow_right_black_24dp"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_comment_black_24dp"/>
+                    android:src="@drawable/ic_comment"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/dp_20"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_attachment_black_24dp"/>
+                    android:src="@drawable/ic_attach"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="0dp"
