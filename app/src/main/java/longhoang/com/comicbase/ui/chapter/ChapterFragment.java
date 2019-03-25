@@ -3,6 +3,11 @@ package longhoang.com.comicbase.ui.chapter;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +19,9 @@ import longhoang.com.comicbase.data.model.api.chapter.ChapterItem;
 import longhoang.com.comicbase.data.model.api.comic.Chapter;
 import longhoang.com.comicbase.databinding.FragmentChapterBinding;
 
-public class ChapterFragment extends BaseFragment<FragmentChapterBinding, ChapterViewModel> {
+public class ChapterFragment extends BaseFragment<FragmentChapterBinding, ChapterViewModel>
+    implements
+    ObservableScrollViewCallbacks {
     private static final String BUNDLE_CHAPTER = "BUNDLE_CHAPTER";
 
     @Override
@@ -37,10 +44,10 @@ public class ChapterFragment extends BaseFragment<FragmentChapterBinding, Chapte
         Chapter chapter = getArguments().getParcelable(BUNDLE_CHAPTER);
         if (chapter == null) return;
         getViewModel().fetchDataChapter(chapter.getUrlChapter());
-        updateWebview();
+        updateWebView();
     }
 
-    private void updateWebview() {
+    private void updateWebView() {
         List<String> images = new ArrayList<>();
         getViewModel().mChapterItemMutableLiveData.observe(this, chapterItems -> {
             for (ChapterItem chapter : chapterItems
@@ -54,6 +61,32 @@ public class ChapterFragment extends BaseFragment<FragmentChapterBinding, Chapte
             getViewDataBinding().webViewComic
                 .loadDataWithBaseURL("", html,
                     "text/html", "UTF-8", "");
+            getViewDataBinding().webViewComic.setScrollViewCallbacks(this);
         });
+    }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) {
+    }
+
+    @Override
+    public void onDownMotionEvent() {
+    }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        RelativeLayout relativeTop = getViewDataBinding().relativeTop;
+        LinearLayout linearComment = getViewDataBinding().linearComment;
+        if (scrollState == ScrollState.UP) {
+            if (relativeTop.isShown()) {
+                relativeTop.setVisibility(View.GONE);
+                linearComment.setVisibility(View.GONE);
+            }
+        } else if (scrollState == ScrollState.DOWN) {
+            if (!relativeTop.isShown()) {
+                relativeTop.setVisibility(View.VISIBLE);
+                linearComment.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

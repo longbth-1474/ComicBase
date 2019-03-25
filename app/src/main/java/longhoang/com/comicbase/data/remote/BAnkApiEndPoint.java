@@ -25,6 +25,8 @@ public final class BAnkApiEndPoint {
     public static final String ENDPOINT_CATEGORY = BuildConfig.BASE_URL + "/categoryComic";
     public static final String ENDPOINT_CATEGORY_CONTENT = BuildConfig.BASE_URL +
         "/contentCategory";
+    public static final String ENDPOINT_SEARCH = BuildConfig.BASE_URL +
+        "/search";
 
     private BAnkApiEndPoint() {
         // This class is not publicly instantiable

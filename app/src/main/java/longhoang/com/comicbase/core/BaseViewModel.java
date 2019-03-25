@@ -33,6 +33,7 @@ public abstract class BaseViewModel extends ViewModel {
     public MutableLiveData<Boolean> showProgressDialog = new MutableLiveData();
     @Inject
     protected BAnkRepository repository;
+
     @Inject
     protected SchedulerProvider schedulerProvider;
     private CompositeDisposable mCompositeDisposable;

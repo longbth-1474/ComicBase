@@ -25,14 +25,32 @@ public class Comic implements Parcelable {
     @SerializedName("_id")
     @Expose
     private String id;
+    @SerializedName("warning")
+    @Expose
+    private Integer warning;
 
-    public Comic(Parcel in) {
+    public Comic(String urlImage, String title, String time, String chapter, String url,
+                 String id) {
+        this.urlImage = urlImage;
+        this.title = title;
+        this.time = time;
+        this.chapter = chapter;
+        this.url = url;
+        this.id = id;
+    }
+
+    protected Comic(Parcel in) {
         urlImage = in.readString();
         title = in.readString();
         time = in.readString();
         chapter = in.readString();
         url = in.readString();
         id = in.readString();
+        if (in.readByte() == 0) {
+            warning = null;
+        } else {
+            warning = in.readInt();
+        }
     }
 
     public static final Creator<Comic> CREATOR = new Creator<Comic>() {
@@ -46,31 +64,6 @@ public class Comic implements Parcelable {
             return new Comic[size];
         }
     };
-
-    public Comic(String urlImage, String title, String time, String chapter, String url,
-                 String id) {
-        this.urlImage = urlImage;
-        this.title = title;
-        this.time = time;
-        this.chapter = chapter;
-        this.url = url;
-        this.id = id;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(urlImage);
-        dest.writeString(title);
-        dest.writeString(time);
-        dest.writeString(chapter);
-        dest.writeString(url);
-        dest.writeString(id);
-    }
 
     public String getUrlImage() {
         return urlImage;
@@ -118,5 +111,34 @@ public class Comic implements Parcelable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getWarning() {
+        return warning;
+    }
+
+    public void setWarning(Integer warning) {
+        this.warning = warning;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(urlImage);
+        dest.writeString(title);
+        dest.writeString(time);
+        dest.writeString(chapter);
+        dest.writeString(url);
+        dest.writeString(id);
+        if (warning == null) {
+            dest.writeByte((byte) 0);
+        } else {
+            dest.writeByte((byte) 1);
+            dest.writeInt(warning);
+        }
     }
 }

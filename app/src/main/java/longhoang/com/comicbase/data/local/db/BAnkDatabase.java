@@ -15,16 +15,19 @@
  */
 package longhoang.com.comicbase.data.local.db;
 
-
 import androidx.room.Database;
 import androidx.room.RoomDatabase;
+import longhoang.com.comicbase.data.local.db.dao.HistorySearchDao;
 import longhoang.com.comicbase.data.local.db.dao.UserDao;
+import longhoang.com.comicbase.data.model.db.HistorySearch;
 import longhoang.com.comicbase.data.model.db.User;
 
 /**
  * Created by amitshekhar on 07/07/17.
  */
-@Database(entities = {User.class}, version = 1, exportSchema = false)
+//@Database(entities = {User.class, HistorySearch.class}, version = 1, exportSchema = false)
+@Database(entities = {User.class, HistorySearch.class}, version = 1, exportSchema = false)
 public abstract class BAnkDatabase extends RoomDatabase {
     public abstract UserDao userDao();
+    public abstract HistorySearchDao mHistorySearchDao();
 }

@@ -14,6 +14,7 @@ import longhoang.com.comicbase.data.model.api.home.NewUpdate;
 import longhoang.com.comicbase.data.model.api.home.Proposal;
 import longhoang.com.comicbase.databinding.FragmentHomeBinding;
 import longhoang.com.comicbase.ui.comic.ComicFragment;
+import longhoang.com.comicbase.ui.search.SearchFragment;
 
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel>
     implements HomeNavigator, HomeListener {
@@ -36,6 +37,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         getViewModel().setHomeNavigator(this);
         initRecyclerNewUpdate();
         initRecyclerTopRead();
+        initListener();
+    }
+
+    private void initListener() {
+        getViewDataBinding().relativeSearch.setOnClickListener(
+            v -> addFragment(SearchFragment.newInstance(), R.id.constraint_layout));
     }
 
     private void initRecyclerTopRead() {

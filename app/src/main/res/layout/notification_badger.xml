@@ -5,7 +5,7 @@
     >
 
     <TextView
-        android:layout_marginRight="@dimen/dp_13"
+        android:visibility="gone"
         android:layout_marginEnd="@dimen/dp_13"
         android:id="@+id/badge"
         android:gravity="center"
